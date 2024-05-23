@@ -14,51 +14,57 @@ class Book {
     author: string,
     pages: string,
   ) {
-    this.title = title.trim() || "Unknown Title";
-    this.author = author.trim() || "Unknown Author";
-    this.pages = +pages || 0;
+    this.title = title.trim() 
+    this.author = author.trim() 
+    this.pages = +pages
   }
 }
 
 
-class Library {
-  library: Book[] = [];
+class Library{
 
-  addBook(book: Book) {
-    this.library.push(book);
-  }
+  library : Book[] = []
 
-  removeBook(title: string) {
-    this.library = this.library.filter(book => book.title !== title);
-  }
-
-  displayBooks() {
-    if (main) {
-      main.innerHTML = '';
-
-      this.library.forEach(book => {
-        const div = document.createElement('div');
-        div.className = 'book';
-        div.innerHTML = `
-          <h2>${book.title}</h2>
-          <p>Author: ${book.author}</p>
-          <p>Pages: ${book.pages}</p>
-          <button class="removeBtn">Remove</button>
-        `;
-        main.append(div);
-
-        const removeBtn = div.querySelector<HTMLButtonElement>(".removeBtn");
-        if (removeBtn) {
-          removeBtn.addEventListener('click', () => {
-            this.removeBook(book.title);
-            this.displayBooks();
-          });
-        }
-      });
+    addBook(book : Book){
+      this.library.push(book)
     }
-  }
 
-  sortBooks(criteria: string) {
+    removeBook(title:string){
+      this.library = this.library.filter(book => book.title !== title)
+    }
+
+    displayBooks(){
+
+      if(main){
+        main.innerHTML ='';
+
+        this.library.forEach(book => {
+
+          const div = document.createElement('div')
+          div.className ='book',
+
+          div.innerHTML=`
+          <h2>${book.title}</h2>
+          <p>${book.author}</p>
+          <p>${book.pages}</p>
+          <button class="removeBtn">Remove</button>
+          `;
+          main.append(div)
+          const removeBtn = div.querySelector<HTMLButtonElement>(".removeBtn")
+          
+          if(removeBtn){
+
+            removeBtn.addEventListener('click', () => {
+            
+              this.removeBook(book.title)
+              this.displayBooks()
+            })
+          }
+        })
+      }
+    }
+
+    sortBooks(criteria: string) {
     if (criteria === "title") {
       this.library.sort((a, b) => (a.title > b.title ? 1 : -1));
     } else if (criteria === "author") {
@@ -70,7 +76,6 @@ class Library {
   }
 }
 
-
 const library  = new Library()
 
 
@@ -79,20 +84,25 @@ if(subBtn && main && sort){
   subBtn.addEventListener("click", (e) => {
     e.preventDefault()
 
-    const title = document.querySelector<HTMLInputElement>("#title")?.value
-    const author = document.querySelector<HTMLInputElement>("#author")?.value
-    const pages = document.querySelector<HTMLInputElement>("#pages")?.value;
+const title =
+  document.querySelector<HTMLInputElement>("#title")?.value || "Unknown Title";
+const author =
+  document.querySelector<HTMLInputElement>("#author")?.value ||
+  "Unknown Author";
+const pages = document.querySelector<HTMLInputElement>("#pages")?.value || "0";
     
 
+   
+
+      const book = new Book(title,author,pages)
+  
+      library.addBook(book)
+      library.displayBooks()
+    })
       
-          const book = new Book(title,author,pages)
-      
-          library.addBook(book)
-          library.displayBooks()
 
 
 
-  })
 
   sort.addEventListener('change', () => {
 
