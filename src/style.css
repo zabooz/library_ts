@@ -1,0 +1,143 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 10rem 1fr;
+    min-height: 100vh;
+
+}
+header{
+    grid-area: 1/1/2/3;
+    background-color:rgba(37, 36, 45, 0.648);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 900;
+}
+.side{
+    grid-area: 2/1/3/2;
+    background-color: rgb(37, 36, 45);
+    min-height: 100%;
+}
+.addBookDiv{
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    
+}
+.addSortDiv{
+    position: sticky;
+    top:2rem;
+
+}
+.addBookDiv label{
+    margin: .2rem 0;
+}
+#submitBtn{
+    color: black;
+    margin-top: 3rem;
+}
+main{
+    background-color: rgba(37, 36, 45, 0.817);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 1rem;
+    row-gap: 1rem;
+    gap: 1rem;
+    align-content: flex-start;
+    min-height: 100%
+    
+}
+.btnDiv{
+    width: 10rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.readCheck{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.addBookPopUp{
+    width: 20rem;
+    height: 20rem;
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    background-color: rgb(52, 46, 46);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.addBookPopUp button:last-of-type{
+    color: black;
+}
+.book{
+    width: 10rem;
+    height: 15rem;
+    background-color:rgb(49, 56, 56);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    box-shadow: 0px 0px 5px 5px gray;
+
+
+}
+.bookRead{
+    box-shadow: 0px 0px 5px 5px greenyellow;
+}
+.book button:last-of-type{
+    color: black;
+}
+.book button:first-of-type{
+    position: absolute ;
+    top: .5rem;
+    right: .5rem;
+    color: red;
+    font-weight: 900;
+}
+.sortDiv{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    gap:1rem;
+
+}
+#sort,
+input,
+option{
+    color: black;
+}
+#addBtn{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: none;
+    background-color: green;
+    font-size: 2rem;
+    font-weight: 900;
+}
+#addBtn:hover{
+    cursor: pointer;
+}
