@@ -138,6 +138,7 @@ option{
     font-size: 2rem;
     font-weight: 900;
 }
-#addBtn:hover{
+#addBtn:hover,
+.readStatus:hover{
     cursor: pointer;
 }
