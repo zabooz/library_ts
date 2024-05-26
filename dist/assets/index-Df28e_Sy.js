@@ -1,0 +1,22 @@
+var q=Object.defineProperty;var P=(s,e,o)=>e in s?q(s,e,{enumerable:!0,configurable:!0,writable:!0,value:o}):s[e]=o;var l=(s,e,o)=>(P(s,typeof e!="symbol"?e+"":e,o),o);(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))r(t);new MutationObserver(t=>{for(const n of t)if(n.type==="childList")for(const i of n.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function o(t){const n={};return t.integrity&&(n.integrity=t.integrity),t.referrerPolicy&&(n.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?n.credentials="include":t.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function r(t){if(t.ep)return;t.ep=!0;const n=o(t);fetch(t.href,n)}})();const g=document.querySelector("#submitBtn"),u=document.querySelector("main"),m=document.querySelector("#sort"),h=document.querySelector("#addBtn");class f{constructor(e,o,r,t){l(this,"title");l(this,"author");l(this,"pages");l(this,"read");this.title=e.trim(),this.author=o.trim(),this.pages=+r,this.read=t?"Finished":"Not Finished"}}class w{constructor(){l(this,"library",[])}addBook(e){this.library.push(e)}removeBook(e){this.library=this.library.filter(o=>o.title!==e)}displayBooks(){u&&h&&(u.innerHTML="",this.library.forEach(e=>{const o=document.createElement("div");o.className="book",o.innerHTML=`
+          <h3>${e.title}</h3>
+          <p>${e.author}</p>
+          <p>Pages: ${e.pages}</p>
+          <p class="readStatus">${e.read}</p>
+          <button class="removeBtn">Remove</button>
+          `;const r=o.querySelector(".removeBtn");r==null||r.addEventListener("click",()=>{this.removeBook(e.title),this.displayBooks()});const t=o.querySelector(".readStatus");t==null||t.addEventListener("click",()=>{t.innerHTML=t.innerHTML==="Finished"?"Not Finished":"Finished",e.read=t.innerHTML,o.classList.toggle("bookRead")}),u.append(o,h)}))}createPopUp(){var p,y,b,v;const e=document.createElement("div");e.id="popUp",e.innerHTML=`
+      <form method="#" class="addBookDiv">
+                <label for="popUpauthor">Author</label>
+                <input type="text" id="popUpAuthor" name="author">
+                <label for="popUpTitel">Title</label>
+                <input type="text" id="popUpTitle" name="title">
+                <label for="popUppages">Pages</label>
+                <input type="number" id="popUpPages" name="pages">
+                <div class="readCheck">
+                    <label for="popUpread">read?</label>
+                    <input type="checkbox" name="read" id="popUpRead">
+                </div>
+                <button id="subPopUp">Submit</button>
+                <button id="cancelPopUp">Cancel</button>
+            </form>
+    `;const o=document.querySelector("body");o==null||o.append(e);const r=((p=e.querySelector("#popUpTitel"))==null?void 0:p.value)||"Unknown title",t=((y=e.querySelector("#popUpAuthor"))==null?void 0:y.value)||"Unknown author",n=((b=e.querySelector("#popUpPages"))==null?void 0:b.value)||"0",i=((v=e.querySelector("#popUpRead"))==null?void 0:v.checked)||!1,c=e.querySelector("#subPopUp"),d=e.querySelector("#cancelPopUp");c&&c.addEventListener("click",()=>{const L=new f(r,t,n,i);a.addBook(L),a.displayBooks(),e.remove()}),d&&d.addEventListener("click",()=>{e.remove()})}sortBooks(e){e==="title"?this.library.sort((o,r)=>o.title>r.title?1:-1):e==="author"?this.library.sort((o,r)=>o.author>r.author?1:-1):e==="pages"&&this.library.sort((o,r)=>o.pages-r.pages),this.displayBooks()}test(e){const o=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];function r(){let t="";for(let n=0;n<9;n++){const i=Math.floor(Math.random()*o.length);t+=o[i]}return t}for(let t=0;t<e;t++){const n=r(),i=r(),c=Math.floor(Math.random()*100),d=c%2===0,p=new f(n,i,c,d);a.addBook(p)}a.displayBooks()}}const a=new w;window.library=a;var k,U,B,S;if(g&&u&&m&&h){const s=((k=document.querySelector("#title"))==null?void 0:k.value)||"Unknown Title",e=((U=document.querySelector("#author"))==null?void 0:U.value)||"Unknown Author",o=((B=document.querySelector("#pages"))==null?void 0:B.value)||"0",r=((S=document.querySelector("#read"))==null?void 0:S.checked)||!1;g.addEventListener("click",t=>{t.preventDefault();const n=new f(s,e,o,r);a.addBook(n),a.displayBooks()}),m.addEventListener("change",()=>{a.sortBooks(m.value)}),h.addEventListener("click",()=>{a.createPopUp()})}
