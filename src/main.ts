@@ -8,10 +8,10 @@ const addBtn = document.querySelector<HTMLButtonElement>("#addBtn");
 class Book {
   title: string;
   author: string;
-  pages: number;
+  pages: number 
   read: string;
 
-  constructor(title: string, author: string, pages: string, read: boolean) {
+  constructor(title: string, author: string, pages: string | number, read: boolean) {
     this.title = title.trim();
     this.author = author.trim();
     this.pages = +pages;
@@ -95,7 +95,7 @@ class Library {
 
     const title =
       div.querySelector<HTMLInputElement>("#popUpTitel")?.value ||
-      "Unknown titel";
+      "Unknown title";
     const author =
       div.querySelector<HTMLInputElement>("#popUpAuthor")?.value ||
       "Unknown author";
@@ -130,9 +130,65 @@ class Library {
     }
     this.displayBooks();
   }
+  test(num:number) {
+  const abc = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+
+  function rdmString() {
+    let str = "";
+
+    for (let i = 0; i < 9; i++) {
+      const rdmNum = Math.floor(Math.random() * abc.length);
+      str += abc[rdmNum];
+    }
+
+    return str;
+  }
+
+  for (let i = 0; i < num; i++) {
+    const author = rdmString();
+    const title = rdmString();
+    const pages = Math.floor(Math.random() * 100);
+    const read = pages % 2 === 0;
+
+    const book = new Book(author, title, pages, read);
+
+    library.addBook(book);
+  }
+
+  library.displayBooks();
+}
+
 }
 
 const library = new Library();
+(window as any).library = library
 
 if (subBtn && main && sort && addBtn) {
   const title =
