@@ -31,8 +31,7 @@ class Library {
   }
 
   displayBooks() {
-    
-    if (main&&addBtn) {
+    if (main && addBtn) {
       main.innerHTML = "";
 
       this.library.forEach((book) => {
@@ -64,7 +63,7 @@ class Library {
           div.classList.toggle("bookRead");
         });
 
-        main.append(div,addBtn);
+        main.append(div, addBtn);
       });
     }
   }
@@ -86,32 +85,39 @@ class Library {
                     <input type="checkbox" name="read" id="popUpRead">
                 </div>
                 <button id="subPopUp">Submit</button>
+                <button id="cancelPopUp">Cancel</button>
             </form>
     `;
 
-    const body = document.querySelector('body')
+    const body = document.querySelector("body");
 
-    body?.append(div)
+    body?.append(div);
 
+    const title =
+      div.querySelector<HTMLInputElement>("#popUpTitel")?.value ||
+      "Unknown titel";
+    const author =
+      div.querySelector<HTMLInputElement>("#popUpAuthor")?.value ||
+      "Unknown author";
+    const pages =
+      div.querySelector<HTMLInputElement>("#popUpPages")?.value || "0";
+    const read =
+      div.querySelector<HTMLInputElement>("#popUpRead")?.checked || false;
 
-    const title = div.querySelector<HTMLInputElement>("#popUpTitel")?.value || "Unknown titel"
-    const author = div.querySelector<HTMLInputElement>("#popUpAuthor")?.value || "Unknown author"
-    const pages = div.querySelector<HTMLInputElement>("#popUpPages")?.value ||"0"
-    const read = div.querySelector<HTMLInputElement>("#popUpRead")?.checked ||false
+    const subBtn = div.querySelector<HTMLButtonElement>("#subPopUp");
+    const cancel = div.querySelector<HTMLButtonElement>("#cancelPopUp");
+    if (subBtn)
+      subBtn.addEventListener("click", () => {
+        const book = new Book(title, author, pages, read);
+        library.addBook(book);
+        library.displayBooks();
+        div.remove();
+      });
 
-    const subBtn = div.querySelector<HTMLButtonElement>('#subPopUp')
-
-    if(subBtn)
-      subBtn.addEventListener('click',() => {
-      const book = new Book(title,author,pages,read)
-      library.addBook(book)
-      library.displayBooks()
-      div.remove()
-    })
-
-
-
-
+    if (cancel)
+      cancel.addEventListener("click", () => {
+        div.remove();
+      });
   }
 
   sortBooks(criteria: string) {
@@ -154,6 +160,6 @@ if (subBtn && main && sort && addBtn) {
   });
 
   addBtn.addEventListener("click", () => {
-      library.createPopUp()
+    library.createPopUp();
   });
 }
